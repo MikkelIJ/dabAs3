@@ -1,0 +1,16 @@
+
+*.json
+
+*.csproj
+
+*.cache
+
+*.props
+
+*.txt
+
+*.dll
+
+*.pdb
+
+.DS_Store
