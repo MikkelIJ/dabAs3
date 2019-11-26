@@ -14,3 +14,7 @@
 *.pdb
 
 .DS_Store
+
+*.targets
+
+obj/Debug/netcoreapp2.2/dabAs3.AssemblyInfo.cs
