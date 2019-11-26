@@ -12,9 +12,10 @@ namespace dabAs3.Service
         public UserService()
         {
             var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("SocialNetworkDB");
+            //var database = client.GetDatabase("SocialNetworkDB");
+            var database = client.GetDatabase("DabAssignment3");
 
-            _users = database.GetCollection<User>("Users");
+            _users = database.GetCollection<User>("User");
         }
 
         public List<User> Get() => _users.Find(user => true).ToList();
