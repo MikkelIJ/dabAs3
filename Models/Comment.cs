@@ -13,7 +13,9 @@ namespace dabAs3.Models
 
         [BsonElement("Author")]
         public string Author {get;set;}
+        [BsonElement("Content")]
         public string Content {get;set;}
+        [BsonElement("Timestamp")]
         public DateTime Timestamp {get;set;}
 
     }

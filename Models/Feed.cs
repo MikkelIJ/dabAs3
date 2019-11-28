@@ -13,6 +13,7 @@ namespace dabAs3.Models
 
         [BsonElement("User")]
         public string User {get;set;}
+        [BsonElement("Circle")]
         public List<string> Circle {get;set;}
 
     }
