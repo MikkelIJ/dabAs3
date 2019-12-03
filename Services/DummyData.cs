@@ -38,7 +38,7 @@ namespace dabAs3.Service
                     Name        = "Mikkel",
                     Gender      = "Male",
                     Age         = 31,
-                    BlockedList = new List<string>(),
+                    BlockList = new List<string>(),
                     Followers   = new List<string>
                     {
                         "100000000000000000000002"
@@ -56,7 +56,7 @@ namespace dabAs3.Service
                     Name        = "Frodi",
                     Gender      = "Male",
                     Age         = 32,
-                    BlockedList = new List<string>(),
+                    BlockList = new List<string>(),
                     Followers   = new List<string>
                     {
                         "100000000000000000000001"

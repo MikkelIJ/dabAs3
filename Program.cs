@@ -9,8 +9,15 @@ namespace dabAs3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("DABAS3!\n"
-            + "Seeding database\n\n");
+            Console.WriteLine("DABAS3!\n\n");
+            Console.WriteLine("Do you want to seed the database with sample data? (y/n)\n");
+
+            var seedingChoice = Console.ReadLine();
+            if(seedingChoice == "y")
+            {
+                Console.WriteLine("Seeding database with sample data\n\n");
+                DummyData dummy_data = new DummyData();
+            }
 
             do
             {

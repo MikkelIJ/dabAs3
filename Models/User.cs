@@ -19,7 +19,7 @@ namespace dabAs3.Models
         public int Age {get;set;}
 
         [BsonElement("BlockedList")]   
-        public List<string> BlockedList {get;set;}
+        public List<string> BlockList {get;set;}
         [BsonElement("Followers")]
         public List<string> Followers {get;set;}
         [BsonElement("Following")]
@@ -31,7 +31,7 @@ namespace dabAs3.Models
         {
             // List to String. mangler at finde en løsning hvor .TrimStart('0') virker for alle tal
 
-            String BlockedString    = String.Join(", ",BlockedList.ToArray());
+            String BlockedString    = String.Join(", ",BlockList.ToArray());
             String FollowerString   = String.Join(", ",Followers.ToArray()).TrimStart('0');
             String FollowingString  = String.Join(", ",Following.ToArray()).TrimStart('0');
             String CirclesString    = String.Join(", ",Circles.ToArray()).TrimStart('0');
