@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using dabAs3.Models;
-using dabAs3.Service;
+using dabAs3.Services;
+using dabAs3.Controllers;
 
 namespace dabAs3
 {
@@ -33,15 +34,48 @@ namespace dabAs3
                 switch (userInput)
                 {
                     case "w":
+                        var wall = new Controller();
+                        Console.WriteLine("Enter user ID");
+                        var userID = Console.ReadLine();
+                        Console.WriteLine("Enter guest ID");
+                        var guestID = Console.ReadLine();
+                        wall.ShowWall(userID, guestID);
                         break;
 
                     case "f":
+                        var feed = new Controller();
+                        Console.WriteLine("Enter user ID");
+                        var userID_feed = Console.ReadLine();
+                        feed.ShowFeed(userID_feed);
                         break;
 
                     case "p":
+                        var newPost = new Controller();
+                        Console.WriteLine("Enter Author of new post");
+                        var OwnerID = Console.ReadLine();
+                        Console.WriteLine("Enter post content");
+                        var Content = Console.ReadLine();
+                        Console.WriteLine("Add post to circle");
+                        string Circle = Console.ReadLine();
+                        Console.WriteLine("Want to make the post public? (y/n");
+                        string pubSel = Console.ReadLine();
+                        bool pub;
+                        if(pubSel == "y"){
+                            pub = true;
+                        }
+                        else{
+                            pub = false;
+                        }
+                        newPost.CreatePost(OwnerID, Content, Circle, pub);
                         break;
 
                     case "c":
+                        var newComment = new Controller();
+                        Console.WriteLine("Enter post ID");
+                        var PostID = Console.ReadLine();
+                        Console.WriteLine("Enter Comment");
+                        var Comment = Console.ReadLine();
+                        newComment.CreateComment(PostID, Comment);
                         break;
 
                     case "x":

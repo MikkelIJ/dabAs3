@@ -14,6 +14,7 @@ namespace dabAs3.Models
         public string Name {get;set;}
         [BsonElement("Users")]
         public List<string> Users {get;set;}
+        public List<string> Posts {get;set;}
 
     }
 }

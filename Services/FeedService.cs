@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MongoDB.Driver;
 using dabAs3.Models;
 
-namespace dabAs3.Service
+namespace dabAs3.Services
 {
     public class FeedService
     {
