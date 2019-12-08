@@ -82,12 +82,23 @@ namespace dabAs3.Controllers
         {
             List<User> user = _userController.Get().FindAll(u => u.Id.Contains(userID));
             List<Post> userPosts = _postController.Get().FindAll(up => up.Author.Equals(userID));
-            //List<Post> circlePosts = _postController.Get().FindAll(cp => cp.Circles.Contains(
+            List<Post> publicPosts = _postController.Get().FindAll(p => p.Privacy == "p");
+            //List<Post> followersPosts = _postController.Get().FindAll(Filter by followers (not solved))
+            //List<Post> circlePosts = _postController.Get().FindAll(Filter by corcles (not solved))
 
             foreach(var l in userPosts)
             {
                 Console.WriteLine();
                 Console.WriteLine("User post:");
+                Console.WriteLine(l.Timestamp.ToString());
+                Console.WriteLine(l.Content);
+            }
+
+            foreach(var l in publicPosts)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Public post:");
+                Console.WriteLine(l.Author);
                 Console.WriteLine(l.Timestamp.ToString());
                 Console.WriteLine(l.Content);
             }

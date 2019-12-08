@@ -26,9 +26,5 @@ namespace dabAs3.Services
             _posts.InsertOne(post);
             return post;
         }
-
-        // public List<Post> GetPostssdfsadfsa() {
-        //     _posts.Find()
-        // }
     }
 }
