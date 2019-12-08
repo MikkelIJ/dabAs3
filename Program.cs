@@ -54,28 +54,29 @@ namespace dabAs3
                         Console.WriteLine("Enter Author of new post");
                         var OwnerID = Console.ReadLine();
                         Console.WriteLine("Enter post content");
-                        var Content = Console.ReadLine();
-                        Console.WriteLine("Add post to circle");
-                        string Circle = Console.ReadLine();
-                        Console.WriteLine("Want to make the post public? (y/n");
-                        string pubSel = Console.ReadLine();
-                        bool pub;
-                        if(pubSel == "y"){
-                            pub = true;
+                        var Content = Console.ReadLine();                       
+                        Console.WriteLine("Add post to circle? {y/n}");
+                        string circ = Console.ReadLine();
+                        string Circle = null;
+                        if(circ == "y")
+                        {
+                            Console.WriteLine("Enter circle ID");
+                            Circle = Console.ReadLine();
                         }
-                        else{
-                            pub = false;
-                        }
-                        newPost.CreatePost(OwnerID, Content, Circle, pub);
+                        Console.WriteLine("Privacy: Enter p for public, f for followers, c for circle");
+                        string Privacy = Console.ReadLine();
+                        newPost.CreatePost(OwnerID, Content, Circle, Privacy);
                         break;
 
                     case "c":
                         var newComment = new Controller();
                         Console.WriteLine("Enter post ID");
                         var PostID = Console.ReadLine();
+                        Console.WriteLine("Enter Author of new comment");
+                        var CommentOwner = Console.ReadLine();
                         Console.WriteLine("Enter Comment");
                         var Comment = Console.ReadLine();
-                        newComment.CreateComment(PostID, Comment);
+                        newComment.CreateComment(PostID, CommentOwner, Comment);
                         break;
 
                     case "x":

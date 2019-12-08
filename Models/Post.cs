@@ -18,7 +18,7 @@ namespace dabAs3.Models
         [BsonElement("Content")]
         public string Content {get;set;}
         [BsonElement("Public")]
-        public bool Public {get;set;}
+        public string Privacy {get;set;}
         [BsonElement("Comments")]
         public List<string> Comments {get;set;}
         [BsonElement("Circles")]

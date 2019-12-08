@@ -12,7 +12,7 @@ namespace dabAs3.Services
         public PostService()
         {
             var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("SocialNetworkDB");
+            var database = client.GetDatabase("DabAssignment3");
 
             _posts = database.GetCollection<Post>("Posts");
         }
@@ -26,5 +26,9 @@ namespace dabAs3.Services
             _posts.InsertOne(post);
             return post;
         }
+
+        // public List<Post> GetPostssdfsadfsa() {
+        //     _posts.Find()
+        // }
     }
 }

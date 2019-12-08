@@ -27,66 +27,113 @@ namespace dabAs3.Controllers
             _commentController = new Comment_Controller(new CommentService(), new PostService());
         }
 
-        public void ShowWall(string userID, string guestId)
+        public void ShowWall(string userID, string guestID)
         {
-            List<Post> userPosts;
-
-            userPosts= _postController.Get().FindAll(p => p.Author.Equals(userID) && p.Public == true);
-
-            foreach(var l in userPosts)
+            List<User> user = _userController.Get().FindAll(u => u.Id.Contains(userID));
+            List<User> guest = _userController.Get().FindAll(u => u.Id.Contains(guestID));
+            List<Circle> circle =_circleController.Get().Where(c => c.Users.Contains(userID) 
+                    && c.Users.Contains(guestID)).ToList();
+            
+            if(user.Any(u => u.BlockList.Contains(guestID)))
             {
-                Console.WriteLine();
-                Console.WriteLine(l.Author);
-                Console.WriteLine(l.Timestamp.ToString());
-                Console.WriteLine(l.Content);
-                Console.WriteLine();
+                Console.WriteLine("Guest is blocked by user");
+            }
+            else
+            {
+                Console.WriteLine("Guest has access to public posts from user");
+                List<Post> publicPosts = _postController.Get().FindAll(f => f.Author.Equals(userID) 
+                    && (f.Privacy == "p"));
+                
+                foreach(var l in publicPosts)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Post");
+                    Console.WriteLine(l.Timestamp.ToString());
+                    Console.WriteLine(l.Content);
+                }
+            }
+
+            if(user.Any(u => u.Followers.Contains(guestID)))
+            {
+                Console.WriteLine("Guest follows user");
+                List<Post> followersPosts = _postController.Get().FindAll(f => f.Author.Equals(userID) 
+                    && (f.Privacy == "p" || f.Privacy == "f"));
+
+                foreach(var l in followersPosts)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Post");
+                    Console.WriteLine(l.Timestamp.ToString());
+                    Console.WriteLine(l.Content);
+                }
+
+            }
+
+            if(circle.Any())
+            {
+                //List<Post> circlePosts = _postController.Get().Where(c => c.Circles.Contains(circle.ID));
+                // Console.Write("User and guest are both part of circle ");
+                // Console.WriteLine(circleID);
             }
 
         }
 
         public void ShowFeed(string userID)
         {
-            var userCircles =_circleController.Get().Value.FindAll(c => c.Users.Contains(UserID)).ToList();
+            List<User> user = _userController.Get().FindAll(u => u.Id.Contains(userID));
+            List<Post> userPosts = _postController.Get().FindAll(up => up.Author.Equals(userID));
+            //List<Post> circlePosts = _postController.Get().FindAll(cp => cp.Circles.Contains(
+
+            foreach(var l in userPosts)
+            {
+                Console.WriteLine();
+                Console.WriteLine("User post:");
+                Console.WriteLine(l.Timestamp.ToString());
+                Console.WriteLine(l.Content);
+            }
+            
 
             // Plausible , not sure about this one
-            var allUserPosts = _postController.Get().Value.FindAll(p => p.Author.Equals(UserID) || userCircles.Contains(p.Circle));
+            //var allUserPosts = _postController.Get().Value.FindAll(p => p.Author.Equals(UserID) || userCircles.Contains(p.Circle));
 
-            foreach(var post in allUserPosts)
-            {
-                Console.WriteLine(post.Author);
-                Console.WriteLine(post.CreationTime.ToString(dateTimeFormat));
-                Console.WriteLine(post.TextContent);
-                Console.WriteLine();
-            }
+            // foreach(var post in allUserPosts)
+            // {
+            //     Console.WriteLine(post.Author);
+            //     Console.WriteLine(post.CreationTime.ToString(dateTimeFormat));
+            //     Console.WriteLine(post.TextContent);
+            //     Console.WriteLine();
+            // }
         }
 
-        public void CreatePost(string userId, string content, string circle, bool pub)
+        public void CreatePost(string userId, string content, string circle, string pub)
         {
-            List<Circle> circ = _circleController.Get().FindAll(c => c.Name.Equals(circle));
+            //var circ = _circleController.Get(circle);
 
             var post = new Post()
             {
                 Author = userId,
                 Timestamp = DateTime.Today,
                 Content = content,
-                Public = pub,
-                Circles = circ,
+                Privacy = pub,
+                //Circles = circle,
             };
-
+            _postController.Create(post);
+            //post.Circles.Add(circle);
         }
 
-        public void CreateComment(string postId, string comment)
+        public void CreateComment(string postId, string commentOwner, string comment)
         {
-            var post = _postController.Get(postId).Value;
+            var post = _postController.Get(postId);
 
             var comm = new Comment
             {
+                Author = commentOwner,
                 Content = comment,
             };
 
-            post.Comments.Add(comm);
+            //post.Comments.Add(comm.Id);
 
-            _postController.Update(post.Id, post);
+            //_postController.Update(post.Id, post);
 
             _commentController.Create(comm);
         }

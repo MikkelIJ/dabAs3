@@ -12,7 +12,7 @@ namespace dabAs3.Services
         public FeedService()
         {
             var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("SocialNetworkDB");
+            var database = client.GetDatabase("DabAssignment3");
 
             _feeds = database.GetCollection<Feed>("Feeds");
         }

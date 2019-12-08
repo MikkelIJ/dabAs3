@@ -21,5 +21,16 @@ namespace dabAs3.Controllers
             return _userService.Get();
         }
 
+        public User Get(string id)
+        {
+            var user = _userService.Get(id);
+            return user;
+        }
+
+        // public User getFollowers(string id)
+        // {
+        //     var user = _userService.
+        // }
+
     }
 }
